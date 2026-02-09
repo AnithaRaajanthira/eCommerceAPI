@@ -24,9 +24,32 @@ npm install
 npm run dev
 ```
 
+then install mongoose,express
+npm i mongoose
+npm i express && npm i -D @types/express
+
+Establish connection with Mongo DB via Atlas and view it in Mongo Compass, add index.ts in db folder under src and copy the below code and change their db Name to yours
+
+import mongoose from "mongoose";
+
+try {
+// Connect
+await mongoose.connect(process.env.MONGO_URI!, {
+dbName: "eCommerce", // Replace with your actual database name
+});
+console.log("\x1b[35mMongoDB connected via Mongoose\x1b[0m");
+} catch (error) {
+// Log error and end Node process if it fails
+console.error("MongoDB connection error:", error);
+process.exit(1);
+}
+
+checkout the project structure in project requirement.
+
 ## 📁 Project Structure
 
 ```bash
+
 .
 ├── package-lock.json   # Dependency lock file (auto-generated)
 ├── package.json        # Project configuration and dependencies
@@ -71,10 +94,10 @@ The project supports internal path aliases using the `#` prefix:
 
 ```typescript
 // Instead of relative imports like this:
-import { helper } from '../../../utils';
+import { helper } from "../../../utils";
 
 // You can use clean aliases like this:
-import { helper } from '#utils';
+import { helper } from "#utils";
 ```
 
 You need to add additional modules subpaths to the `imports` field in `package.json`
