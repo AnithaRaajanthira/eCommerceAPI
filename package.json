@@ -24,6 +24,14 @@
     "#types": {
       "development": "./src/types/index.ts",
       "default": "./dist/types/index.js"
+    },
+    "#schemas": {
+      "development": "./src/schemas/index.ts",
+      "default": "./dist/schemas/index.js"
+    },
+    "#middleware": {
+      "development": "./src/middleware/index.ts",
+      "default": "./dist/middleware/index.js"
     }
   },
   "scripts": {
@@ -43,6 +51,7 @@
   },
   "dependencies": {
     "express": "^5.2.1",
-    "mongoose": "^9.1.6"
+    "mongoose": "^9.1.6",
+    "zod": "^4.3.6"
   }
 }
