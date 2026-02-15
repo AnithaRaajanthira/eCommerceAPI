@@ -24,6 +24,14 @@
     "#types": {
       "development": "./src/types/index.ts",
       "default": "./dist/types/index.js"
+    },
+    "#schemas": {
+      "development": "./src/schemas/index.ts",
+      "default": "./dist/schemas/index.js"
+    },
+    "#middleware": {
+      "development": "./src/middleware/index.ts",
+      "default": "./dist/middleware/index.js"
     }
   },
   "scripts": {
@@ -37,10 +45,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/express": "^5.0.6",
     "@types/node": "^22.19.10",
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "mongoose": "^9.1.6"
+    "express": "^5.2.1",
+    "mongoose": "^9.1.6",
+    "zod": "^4.3.6"
   }
 }
