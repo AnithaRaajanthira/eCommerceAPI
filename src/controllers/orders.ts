@@ -1,6 +1,6 @@
 import { type RequestHandler } from "express";
 import { z } from "zod/v4";
-import { Order } from "#models";
+import { Order, Product } from "#models";
 import { orderInputSchema, orderSchema } from "#schemas";
 
 type orderDTO = z.infer<typeof orderSchema>;
@@ -20,7 +20,18 @@ const getOrders: RequestHandler<{}, orderDTO[]> = async (req, res) => {
 const createOrder: RequestHandler<{}, orderDTO, orderInputDTO> = async (req, res) => {
   //   const { userId, products, total } = req.body;
   const validatedData = orderInputSchema.parse(req.body);
-  const order = await Order.create(validatedData);
+  const { products } = validatedData;
+  let total = 0;
+  for (let i = 0; i < products.length; i++) {
+    const product = await Product.findById(products[i]?.productId);
+    const { price } = product;
+    const quantity = products[i]?.quantity;
+    const summe = price * quantity;
+    console.log(summe);
+    total = total + summe;
+  }
+  validatedData.total = total;
+  const order = (await Order.create(validatedData)) satisfies orderDTO;
   //   const order = await Order.create({ userId, products, total } satisfies orderInputDTO);
   res.status(201).json(order);
 };
