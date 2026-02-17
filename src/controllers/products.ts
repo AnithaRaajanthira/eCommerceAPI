@@ -2,6 +2,7 @@ import { type RequestHandler } from "express";
 import { z } from "zod/v4";
 import { Product } from "#models";
 import { productInputSchema, productSchema } from "#schemas";
+import { Types } from "mongoose";
 
 type productInputDTO = z.infer<typeof productInputSchema>;
 type Idparams = { id: string };
@@ -11,7 +12,7 @@ type productDTO = z.infer<typeof productSchema>;
 const getProduct: RequestHandler<{}, any[], {}, productQuery> = async (req, res) => {
   const { categoryId } = req.query;
   // console.log(req.query);
-  const filter = categoryId ? { categoryId: categoryId } : {}; //we r assigning the categoryId to categoryId field in Product schema//
+  const filter = categoryId ? { categoryId: categoryId } : {}; //we r assigning the categoryId to category field in Product model//
   const products = await Product.find(filter).lean();
   res.json(products);
 };
